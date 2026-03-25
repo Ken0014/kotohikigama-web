@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>琴引窯 — 手びねりの陶芸教室</title>
+  <meta name="description" content="琴引窯は、作陶家が主宰する少人数制の陶芸教室です。土と向き合い、自分だけの器をつくる時間を。">
+  <meta property="og:title" content="琴引窯 — 手びねりの陶芸教室">
+  <meta property="og:description" content="土と向き合い、自分だけの器をつくる時間を。">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Hero ── */
+    .hero {
+      min-height: 100svh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; background: var(--smoke); overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 18% 55%, rgba(160,97,74,0.09) 0%, transparent 50%),
+        radial-gradient(circle at 82% 30%, rgba(107,79,58,0.06) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    .hero-vline {
+      position: absolute; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(160,97,74,0.2), transparent);
+    }
+    .hero-vline:nth-child(1) { left: 8%; }
+    .hero-vline:nth-child(2) { right: 8%; }
+
+    .hero-content {
+      text-align: center; position: relative; z-index: 1;
+      padding: 2rem;
+      opacity: 0; transform: translateY(30px);
+      animation: heroIn 1.3s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
+    }
+    @keyframes heroIn { to { opacity: 1; transform: none; } }
+
+    .hero-en {
+      font-size: 0.65rem; letter-spacing: 0.42em;
+      color: var(--clay); text-transform: uppercase; margin-bottom: 1.8rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 12vw, 7.5rem);
+      font-weight: 400; letter-spacing: 0.2em;
+      color: var(--soil); line-height: 1.1; margin-bottom: 2rem;
+    }
+    .hero-sub {
+      font-family: var(--serif);
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      letter-spacing: 0.25em; color: var(--ash);
+      margin-bottom: 3rem; line-height: 2.4;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 0.9rem 2.8rem;
+      border: 1px solid var(--clay);
+      color: var(--clay); text-decoration: none;
+      font-size: 0.75rem; letter-spacing: 0.2em;
+      transition: all 0.3s;
+    }
+    .hero-cta:hover { background: var(--clay); color: var(--white); }
+
+    .scroll-hint {
+      position: absolute; bottom: 2.2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--ash-lt); font-size: 0.62rem; letter-spacing: 0.22em;
+      animation: scrollBounce 2.8s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(7px); }
+    }
+    .scroll-hint::after {
+      content: ''; width: 1px; height: 32px;
+      background: linear-gradient(to bottom, var(--clay-lt), transparent);
+    }
+
+    /* ── Summary cards ── */
+    .summary {
+      background: var(--white);
+      padding: 5rem 2rem;
+    }
+    .summary-grid {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+      border: 1px solid var(--sand-dk);
+    }
+    .summary-card {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-right: 1px solid var(--sand-dk);
+      text-decoration: none; color: inherit;
+      transition: background 0.3s;
+    }
+    .summary-card:last-child { border-right: none; }
+    .summary-card:hover { background: var(--smoke); }
+    .summary-card-num {
+      font-family: var(--serif);
+      font-size: 2.2rem; color: rgba(160,97,74,0.18);
+      display: block; margin-bottom: 0.8rem;
+    }
+    .summary-card-ja {
+      font-family: var(--serif);
+      font-size: 1rem; letter-spacing: 0.15em;
+      color: var(--soil); display: block; margin-bottom: 0.6rem;
+    }
+    .summary-card-en {
+      font-size: 0.65rem; letter-spacing: 0.28em;
+      color: var(--ash); text-transform: uppercase; display: block;
+      margin-bottom: 1.2rem;
+    }
+    .summary-card-body {
+      font-size: 0.78rem; line-height: 2;
+      color: var(--ash);
+    }
+
+    /* ── Concept ── */
+    .concept {
+      background: var(--sand);
+      padding: 6rem 2rem; text-align: center;
+    }
+    .concept-inner { max-width: 700px; margin: 0 auto; }
+    .concept-kamon {
+      font-family: var(--serif);
+      font-size: 3rem; color: rgba(107,79,58,0.15);
+      display: block; margin-bottom: 2rem; letter-spacing: 0.1em;
+    }
+    .concept-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+      font-weight: 400; letter-spacing: 0.22em;
+      color: var(--soil); line-height: 2.2; margin-bottom: 2.5rem;
+    }
+    .concept-body {
+      font-size: 0.85rem; line-height: 2.6;
+      color: rgba(107,79,58,0.75);
+    }
+
+    /* ── Works preview ── */
+    .works-preview {
+      background: var(--smoke); padding: 5rem 2rem;
+    }
+    .works-preview-inner { max-width: 900px; margin: 0 auto; }
+    .works-preview-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; margin-bottom: 2rem;
+    }
+    .works-link {
+      font-size: 0.72rem; letter-spacing: 0.18em;
+      color: var(--clay); text-decoration: none;
+      border-bottom: 1px solid rgba(160,97,74,0.35);
+      padding-bottom: 2px; transition: border-color 0.25s;
+    }
+    .works-link:hover { border-color: var(--clay); }
+    .works-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem;
+    }
+    .work-thumb {
+      aspect-ratio: 4/5; background: var(--sand-dk);
+      position: relative; overflow: hidden;
+    }
+    .work-thumb:nth-child(2) { margin-top: 2rem; }
+    .work-thumb-label {
+      position: absolute; bottom: 0.8rem; left: 0.8rem;
+      font-size: 0.68rem; letter-spacing: 0.15em;
+      color: var(--soil); opacity: 0.65;
+    }
+    .work-thumb-ph {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ash-lt); font-size: 0.7rem; letter-spacing: 0.18em;
+    }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      background: var(--soil); padding: 5rem 2rem;
+      text-align: center;
+    }
+    .cta-banner h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 3.5vw, 2rem);
+      font-weight: 400; letter-spacing: 0.15em;
+      color: var(--sand); margin-bottom: 1.5rem;
+    }
+    .cta-banner p {
+      font-size: 0.83rem; line-height: 2.4;
+      color: rgba(232,221,208,0.6); margin-bottom: 2.5rem;
+    }
+    .cta-banner a {
+      display: inline-block;
+      padding: 0.9rem 2.8rem;
+      border: 1px solid var(--clay-lt);
+      color: var(--sand); text-decoration: none;
+      font-size: 0.75rem; letter-spacing: 0.2em;
+      transition: all 0.3s;
+    }
+    .cta-banner a:hover { background: var(--clay-lt); }
+
+    @media (max-width: 768px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .summary-card { border-right: none; border-bottom: 1px solid var(--sand-dk); }
+      .summary-card:last-child { border-bottom: none; }
+      .works-grid { grid-template-columns: repeat(2,1fr); }
+      .work-thumb:nth-child(2) { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">琴引窯</a>
+  <ul class="nav-links">
+    <li><a href="about.html">窯について</a></li>
+    <li><a href="gallery.html">作品</a></li>
+    <li><a href="class.html">陶芸教室</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="about.html" class="mobile-link">窯について</a>
+  <a href="gallery.html" class="mobile-link">作品</a>
+  <a href="class.html" class="mobile-link">陶芸教室</a>
+  <a href="contact.html" class="mobile-link">お問い合わせ</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-vline"></div>
+  <div class="hero-vline"></div>
+  <div class="hero-content">
+    <p class="hero-en">Kotohiki Gama — Ceramic Studio</p>
+    <h1 class="hero-title">琴引窯</h1>
+    <p class="hero-sub">
+      土と向き合い、<br>
+      自分だけの器をつくる時間を。
+    </p>
+    <a href="class.html" class="hero-cta">陶芸教室について</a>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- Summary -->
+<div class="summary">
+  <div class="summary-grid reveal">
+    <a class="summary-card" href="about.html">
+      <span class="summary-card-num">01</span>
+      <span class="summary-card-ja">窯について</span>
+      <span class="summary-card-en">About</span>
+      <span class="summary-card-body">作陶家と窯の紹介。<br>ものづくりへの想いを。</span>
+    </a>
+    <a class="summary-card" href="gallery.html">
+      <span class="summary-card-num">02</span>
+      <span class="summary-card-ja">作品</span>
+      <span class="summary-card-en">Works</span>
+      <span class="summary-card-body">茶碗・花器・湯呑など<br>日々の器を。</span>
+    </a>
+    <a class="summary-card" href="class.html">
+      <span class="summary-card-num">03</span>
+      <span class="summary-card-ja">陶芸教室</span>
+      <span class="summary-card-en">Class</span>
+      <span class="summary-card-body">体験から継続まで。<br>少人数・丁寧な指導。</span>
+    </a>
+  </div>
+</div>
+
+<!-- Concept -->
+<section class="concept">
+  <div class="concept-inner reveal">
+    <span class="concept-kamon">琴</span>
+    <p class="concept-quote">
+      土の声を聞く、<br>
+      手のひらで感じる、<br>
+      窯が答えを出す。
+    </p>
+    <p class="concept-body">
+      轆轤も機械も使わない、手びねりの陶芸。<br>
+      思い通りにならない土の抵抗感と、焼き上がりを待つ時間。<br>
+      窯出しの瞬間に出会う、予想を超えた景色。<br>
+      そのすべてが、器をつくることの喜びです。
+    </p>
+  </div>
+</section>
+
+<!-- Works preview -->
+<section class="works-preview">
+  <div class="works-preview-inner">
+    <div class="works-preview-header reveal">
+      <div>
+        <span class="section-label">Works</span>
+        <h2 class="section-title" style="margin-bottom:0">作品</h2>
+      </div>
+      <a href="gallery.html" class="works-link">すべての作品を見る →</a>
+    </div>
+    <div class="works-grid reveal">
+      <div class="work-thumb" style="--d:0ms">
+        <div class="work-thumb-ph">写真</div>
+        <span class="work-thumb-label">茶碗</span>
+      </div>
+      <div class="work-thumb" style="--d:80ms">
+        <div class="work-thumb-ph">写真</div>
+        <span class="work-thumb-label">花器</span>
+      </div>
+      <div class="work-thumb" style="--d:160ms">
+        <div class="work-thumb-ph">写真</div>
+        <span class="work-thumb-label">湯呑</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="reveal">
+    <h2>一緒に、土と向き合いませんか。</h2>
+    <p>体験教室のご予約・継続教室のご相談は<br>お気軽にお問い合わせください。</p>
+    <a href="contact.html">お問い合わせはこちら</a>
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="index.html">琴引窯</a>
+  <ul class="footer-links">
+    <li><a href="about.html">窯について</a></li>
+    <li><a href="gallery.html">作品</a></li>
+    <li><a href="class.html">陶芸教室</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2026 琴引窯. All rights reserved.</p>
+</footer>
+
+<script src="common.js"></script>
+</body>
+</html>

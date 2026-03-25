@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>窯について — 琴引窯</title>
+  <meta name="description" content="琴引窯の作陶家と窯のご紹介。手びねりにこだわる陶芸家が、ものづくりへの想いをお伝えします。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Profile section */
+    .profile { background: var(--white); }
+    .profile-grid {
+      display: grid; grid-template-columns: 380px 1fr;
+      gap: 5rem; align-items: start;
+    }
+    .profile-img {
+      position: sticky; top: 7rem;
+    }
+    .profile-img-frame {
+      aspect-ratio: 3/4;
+      background: var(--sand);
+      position: relative; overflow: hidden;
+    }
+    .profile-img-frame::after {
+      content: ''; position: absolute;
+      bottom: -1px; left: -1px; right: -1px;
+      height: 4px; background: var(--clay);
+    }
+    .profile-img-ph {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ash-lt); font-size: 0.72rem; letter-spacing: 0.18em;
+    }
+    .profile-img-caption {
+      margin-top: 1rem;
+      font-size: 0.72rem; letter-spacing: 0.12em;
+      color: var(--ash); text-align: right;
+    }
+
+    .profile-text p {
+      font-size: 0.88rem; line-height: 2.6;
+      color: rgba(44,36,32,0.78); margin-bottom: 2rem;
+    }
+    .profile-name {
+      font-family: var(--serif);
+      font-size: 1.6rem; letter-spacing: 0.15em;
+      color: var(--soil); margin-bottom: 0.4rem;
+    }
+    .profile-name-en {
+      font-size: 0.72rem; letter-spacing: 0.28em;
+      color: var(--ash); display: block; margin-bottom: 2rem;
+    }
+
+    /* Timeline / career */
+    .timeline { list-style: none; margin-top: 2.5rem; }
+    .timeline li {
+      display: flex; gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-left: 1px solid var(--sand-dk);
+      padding-left: 1.5rem; position: relative;
+    }
+    .timeline li::before {
+      content: ''; position: absolute;
+      left: -4px; top: 6px;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--clay);
+    }
+    .timeline-year {
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      color: var(--clay); white-space: nowrap; padding-top: 2px;
+      min-width: 3.5rem;
+    }
+    .timeline-body {
+      font-size: 0.82rem; line-height: 1.9; color: var(--ash);
+    }
+
+    /* Kiln section */
+    .kiln { background: var(--smoke); }
+    .kiln-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+    }
+    .kiln-img {
+      aspect-ratio: 4/3; background: var(--sand-dk);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ash-lt); font-size: 0.72rem; letter-spacing: 0.18em;
+    }
+    .kiln-text p {
+      font-size: 0.85rem; line-height: 2.5;
+      color: rgba(44,36,32,0.72); margin-bottom: 1.5rem;
+    }
+
+    /* Process steps */
+    .process { background: var(--sand); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; margin-top: 2.5rem;
+      border: 1px solid var(--sand-dk);
+    }
+    .process-step {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--sand-dk);
+      text-align: center;
+    }
+    .process-step:last-child { border-right: none; }
+    .process-step-num {
+      font-family: var(--serif);
+      font-size: 1.8rem; color: rgba(160,97,74,0.2);
+      display: block; margin-bottom: 0.8rem;
+    }
+    .process-step-ja {
+      font-family: var(--serif);
+      font-size: 0.95rem; letter-spacing: 0.12em;
+      color: var(--soil); display: block; margin-bottom: 0.5rem;
+    }
+    .process-step-body {
+      font-size: 0.75rem; line-height: 1.9; color: var(--ash);
+    }
+
+    @media (max-width: 900px) {
+      .profile-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .profile-img { position: static; }
+      .kiln-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: repeat(2,1fr); }
+      .process-step:nth-child(2) { border-right: none; }
+      .process-step { border-bottom: 1px solid var(--sand-dk); }
+      .process-step:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">琴引窯</a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">窯について</a></li>
+    <li><a href="gallery.html">作品</a></li>
+    <li><a href="class.html">陶芸教室</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="about.html" class="mobile-link">窯について</a>
+  <a href="gallery.html" class="mobile-link">作品</a>
+  <a href="class.html" class="mobile-link">陶芸教室</a>
+  <a href="contact.html" class="mobile-link">お問い合わせ</a>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="page-header-en">About</span>
+    <h1 class="page-header-ja">窯について</h1>
+  </div>
+</div>
+
+<!-- 作陶家プロフィール -->
+<section class="content profile">
+  <div class="section-inner">
+    <div class="profile-grid">
+      <div class="profile-img reveal">
+        <div class="profile-img-frame">
+          <div class="profile-img-ph">［ お父様のお写真 ］</div>
+        </div>
+        <p class="profile-img-caption">琴引窯・主宰</p>
+      </div>
+      <div class="profile-text reveal">
+        <span class="section-label">Ceramist</span>
+        <p class="profile-name">大石　実</p>
+        <span class="profile-name-en">Oishi Minoru</span>
+        <p>
+          香川県観音寺市を拠点に活動する作陶家。
+          長年にわたり陶芸と向き合い、琴引窯を主宰しています。
+        </p>
+        <p>
+          手びねりの技法を中心に、日常で使える器を制作しています。
+          土の質感や、釉薬が生み出す偶然の表情を大切にしながら、
+          ひとつひとつ丁寧に仕上げています。
+        </p>
+        <p>
+          教室では、陶芸の楽しさを伝えることを第一に、
+          初めての方にも経験者の方にも、
+          それぞれのペースで向き合える場をつくっています。
+        </p>
+
+        <!-- 経歴（任意） -->
+        <ul class="timeline">
+          <li>
+            <span class="timeline-year">〔年〕</span>
+            <span class="timeline-body">〔陶芸を始めたきっかけ・師事など〕</span>
+          </li>
+          <li>
+            <span class="timeline-year">〔年〕</span>
+            <span class="timeline-body">琴引窯を開設</span>
+          </li>
+          <li>
+            <span class="timeline-year">〔年〕</span>
+            <span class="timeline-body">〔展示会・受賞・活動など〕</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 窯・工房の紹介 -->
+<section class="content kiln">
+  <div class="section-inner">
+    <div class="kiln-grid">
+      <div class="kiln-img reveal">
+        ［ 工房・窯の写真 ］
+      </div>
+      <div class="reveal">
+        <span class="section-label">Studio</span>
+        <h2 class="section-title">工房・窯</h2>
+        <div class="divider"></div>
+        <p>
+          香川県観音寺市にある琴引窯の工房は、
+          瀬戸内の温暖な気候に包まれた静かな環境にあります。
+          静かな環境の中で、じっくりと土と向き合えます。
+        </p>
+        <p>
+          窯は電気窯（素焼き・本焼きの2段階）を使用。
+          焼成温度や時間を丁寧に管理し、
+          釉薬の発色や風合いに最もよい条件で焼き上げています。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 制作の流れ -->
+<section class="content process">
+  <div class="section-inner">
+    <span class="section-label reveal">Process</span>
+    <h2 class="section-title reveal">制作の流れ</h2>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <span class="process-step-num">01</span>
+        <span class="process-step-ja">土練り</span>
+        <span class="process-step-body">空気を抜き、土の状態を整えるところから始まります。</span>
+      </div>
+      <div class="process-step">
+        <span class="process-step-num">02</span>
+        <span class="process-step-ja">成形</span>
+        <span class="process-step-body">手びねりで形をつくります。思い通りにいかないのも醍醐味。</span>
+      </div>
+      <div class="process-step">
+        <span class="process-step-num">03</span>
+        <span class="process-step-ja">素焼き・施釉</span>
+        <span class="process-step-body">乾燥後に素焼きをし、釉薬をかけます。色や質感を選ぶ楽しさ。</span>
+      </div>
+      <div class="process-step">
+        <span class="process-step-num">04</span>
+        <span class="process-step-ja">本焼き・完成</span>
+        <span class="process-step-body">窯で焼き上げて完成。窯出しの瞬間が最大の喜びです。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="index.html">琴引窯</a>
+  <ul class="footer-links">
+    <li><a href="about.html">窯について</a></li>
+    <li><a href="gallery.html">作品</a></li>
+    <li><a href="class.html">陶芸教室</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2026 琴引窯. All rights reserved.</p>
+</footer>
+
+<script src="common.js"></script>
+</body>
+</html>

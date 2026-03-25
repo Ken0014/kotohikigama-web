@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陶芸教室 — 琴引窯</title>
+  <meta name="description" content="琴引窯の陶芸教室。体験から継続まで、少人数制で丁寧に指導します。初めての方歓迎。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Class cards */
+    .class-section { background: var(--white); }
+    .class-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; margin-top: 2.5rem;
+    }
+    .class-card {
+      border: 1px solid var(--sand-dk);
+      position: relative; overflow: hidden;
+    }
+    .class-card-img {
+      aspect-ratio: 4/3; background: var(--sand);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ash-lt); font-size: 0.72rem; letter-spacing: 0.18em;
+    }
+    .class-card-body { padding: 2rem 2rem 2.5rem; }
+    .class-card-tag {
+      display: inline-block;
+      font-size: 0.62rem; letter-spacing: 0.22em;
+      color: var(--white); background: var(--clay);
+      padding: 0.3rem 0.8rem; margin-bottom: 1rem;
+    }
+    .class-card-title {
+      font-family: var(--serif);
+      font-size: 1.3rem; font-weight: 400; letter-spacing: 0.12em;
+      color: var(--soil); margin-bottom: 1rem;
+    }
+    .class-card-desc {
+      font-size: 0.83rem; line-height: 2.2;
+      color: var(--ash); margin-bottom: 1.5rem;
+    }
+    .class-card-specs { list-style: none; border-top: 1px solid var(--sand-dk); }
+    .class-card-specs li {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--sand-dk);
+      font-size: 0.78rem;
+    }
+    .spec-label { color: var(--ash); letter-spacing: 0.1em; }
+    .spec-val { color: var(--soil); font-family: var(--serif); letter-spacing: 0.08em; }
+
+    /* Flow section */
+    .flow { background: var(--smoke); }
+    .flow-steps {
+      margin-top: 2.5rem;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .flow-step {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 1.5rem; padding: 2rem 0;
+      border-bottom: 1px solid var(--sand-dk);
+      align-items: start;
+    }
+    .flow-step:first-child { border-top: 1px solid var(--sand-dk); }
+    .flow-step-num {
+      font-family: var(--serif);
+      font-size: 2.5rem; color: rgba(160,97,74,0.2);
+      line-height: 1;
+    }
+    .flow-step-title {
+      font-family: var(--serif);
+      font-size: 1rem; letter-spacing: 0.12em;
+      color: var(--soil); margin-bottom: 0.5rem;
+    }
+    .flow-step-body {
+      font-size: 0.82rem; line-height: 2.1; color: var(--ash);
+    }
+
+    /* FAQ section */
+    .faq { background: var(--sand); }
+    .faq-list { margin-top: 2rem; }
+    .faq-item {
+      border-bottom: 1px solid rgba(160,97,74,0.2);
+    }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 0; cursor: pointer; text-align: left;
+      gap: 1rem;
+    }
+    .faq-q-text {
+      font-family: var(--serif);
+      font-size: 0.92rem; letter-spacing: 0.1em;
+      color: var(--soil);
+    }
+    .faq-q-text::before {
+      content: 'Q. ';
+      color: var(--clay);
+    }
+    .faq-icon {
+      flex-shrink: 0; width: 20px; height: 20px;
+      border: 1px solid var(--clay-lt); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; color: var(--clay);
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.22,1,0.36,1),
+                  padding 0.35s;
+      padding: 0;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding-bottom: 1.4rem;
+    }
+    .faq-a-inner {
+      font-size: 0.82rem; line-height: 2.2; color: rgba(107,79,58,0.8);
+    }
+
+    /* CTA */
+    .class-cta {
+      background: var(--soil); padding: 5rem 2rem; text-align: center;
+    }
+    .class-cta h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 400; letter-spacing: 0.15em;
+      color: var(--sand); margin-bottom: 1.2rem;
+    }
+    .class-cta p {
+      font-size: 0.82rem; line-height: 2.4;
+      color: rgba(232,221,208,0.6); margin-bottom: 2.2rem;
+    }
+    .class-cta a {
+      display: inline-block;
+      padding: 0.9rem 2.8rem;
+      border: 1px solid var(--clay-lt);
+      color: var(--sand); text-decoration: none;
+      font-size: 0.75rem; letter-spacing: 0.2em;
+      transition: all 0.3s;
+    }
+    .class-cta a:hover { background: var(--clay-lt); }
+
+    @media (max-width: 768px) {
+      .class-cards { grid-template-columns: 1fr; }
+      .flow-step { grid-template-columns: 54px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">琴引窯</a>
+  <ul class="nav-links">
+    <li><a href="about.html">窯について</a></li>
+    <li><a href="gallery.html">作品</a></li>
+    <li><a href="class.html" class="active">陶芸教室</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="about.html" class="mobile-link">窯について</a>
+  <a href="gallery.html" class="mobile-link">作品</a>
+  <a href="class.html" class="mobile-link">陶芸教室</a>
+  <a href="contact.html" class="mobile-link">お問い合わせ</a>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="page-header-en">Class</span>
+    <h1 class="page-header-ja">陶芸教室</h1>
+  </div>
+</div>
+
+<!-- Class cards -->
+<section class="content class-section">
+  <div class="section-inner">
+    <span class="section-label reveal">Course</span>
+    <h2 class="section-title reveal">コース案内</h2>
+    <div class="class-cards reveal">
+
+      <div class="class-card">
+        <div class="class-card-img">［ 体験教室の写真 ］</div>
+        <div class="class-card-body">
+          <span class="class-card-tag">TRIAL</span>
+          <h3 class="class-card-title">体験教室</h3>
+          <p class="class-card-desc">
+            陶芸が初めての方向けの体験コースです。
+            手びねりで小皿や湯呑など、お好みの器をひとつ制作していただけます。
+            焼き上がりは後日お渡しします。
+          </p>
+          <ul class="class-card-specs">
+            <li>
+              <span class="spec-label">料金</span>
+              <span class="spec-val">〔金額〕円（焼成・釉薬込み）</span>
+            </li>
+            <li>
+              <span class="spec-label">所要時間</span>
+              <span class="spec-val">約2時間</span>
+            </li>
+            <li>
+              <span class="spec-label">定員</span>
+              <span class="spec-val">〔人数〕名（少人数制）</span>
+            </li>
+            <li>
+              <span class="spec-label">対象</span>
+              <span class="spec-val">初めての方・お子様も歓迎</span>
+            </li>
+            <li>
+              <span class="spec-label">持ち物</span>
+              <span class="spec-val">汚れてもよい服装</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="class-card">
+        <div class="class-card-img">［ 継続教室の写真 ］</div>
+        <div class="class-card-body">
+          <span class="class-card-tag">REGULAR</span>
+          <h3 class="class-card-title">継続教室</h3>
+          <p class="class-card-desc">
+            継続して陶芸に取り組みたい方向けのコースです。
+            自分のペースで作品づくりを進めながら、
+            技術を磨いていただけます。経験者の方も歓迎。
+          </p>
+          <ul class="class-card-specs">
+            <li>
+              <span class="spec-label">料金</span>
+              <span class="spec-val">〔金額〕円（都度 / 月額）</span>
+            </li>
+            <li>
+              <span class="spec-label">開催日程</span>
+              <span class="spec-val">不定期・ご相談ベース</span>
+            </li>
+            <li>
+              <span class="spec-label">定員</span>
+              <span class="spec-val">少人数制</span>
+            </li>
+            <li>
+              <span class="spec-label">対象</span>
+              <span class="spec-val">経験者・体験済みの方優先</span>
+            </li>
+            <li>
+              <span class="spec-label">持ち物</span>
+              <span class="spec-val">汚れてもよい服装</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Flow -->
+<section class="content flow">
+  <div class="section-inner">
+    <span class="section-label reveal">Flow</span>
+    <h2 class="section-title reveal">ご参加の流れ</h2>
+    <div class="flow-steps reveal">
+      <div class="flow-step">
+        <span class="flow-step-num">01</span>
+        <div>
+          <p class="flow-step-title">お問い合わせ</p>
+          <p class="flow-step-body">
+            お問い合わせフォーム、またはInstagramのDMにて
+            ご希望の日程・コースをお知らせください。
+          </p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-step-num">02</span>
+        <div>
+          <p class="flow-step-title">日程のご確認</p>
+          <p class="flow-step-body">
+            折り返しご連絡のうえ、日程を調整させていただきます。
+            ご希望に沿えるよう、できるだけ柔軟に対応します。
+          </p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-step-num">03</span>
+        <div>
+          <p class="flow-step-title">当日・制作</p>
+          <p class="flow-step-body">
+            工房にお越しいただき、制作スタート。
+            汚れてもよい服装でお越しください。
+            道具・エプロンはご用意しています。
+          </p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-step-num">04</span>
+        <div>
+          <p class="flow-step-title">焼成・お渡し</p>
+          <p class="flow-step-body">
+            制作後、素焼き・施釉・本焼きを経て完成。
+            焼き上がりまで約〔日数〕週間ほどいただきます。
+            完成次第ご連絡のうえ、お渡しします。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="content faq">
+  <div class="section-inner">
+    <span class="section-label reveal">FAQ</span>
+    <h2 class="section-title reveal">よくあるご質問</h2>
+    <div class="faq-list reveal">
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">陶芸が全く初めてでも参加できますか？</span>
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">
+            はい、大歓迎です。体験教室は初めての方を対象としたコースです。
+            基本的な土の触り方からていねいにお教えしますので、
+            ご安心してご参加ください。
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">子どもと一緒に参加できますか？</span>
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">
+            〔年齢〕歳以上のお子様であれば、保護者の方と一緒にご参加いただけます。
+            詳しくはお問い合わせ時にご相談ください。
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">何を作ることができますか？</span>
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">
+            小皿・湯呑・お茶碗など、日常的に使える器を中心にお作りいただけます。
+            ご希望をお聞かせいただければ、できる範囲でご対応します。
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">駐車場はありますか？</span>
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">
+            〔駐車場の有無・台数など〕。
+            お越しの際はお問い合わせ時にご確認ください。
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">グループや団体での参加は可能ですか？</span>
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">
+            少人数グループでのご参加も歓迎しています。
+            人数・日程についてはお問い合わせにてご相談ください。
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="class-cta">
+  <div class="reveal">
+    <h2>ご予約・お問い合わせ</h2>
+    <p>
+      体験教室・継続教室のご予約は<br>
+      お問い合わせフォームまたはInstagramのDMにてお気軽にどうぞ。
+    </p>
+    <a href="contact.html">お問い合わせはこちら</a>
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="index.html">琴引窯</a>
+  <ul class="footer-links">
+    <li><a href="about.html">窯について</a></li>
+    <li><a href="gallery.html">作品</a></li>
+    <li><a href="class.html">陶芸教室</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2026 琴引窯. All rights reserved.</p>
+</footer>
+
+<script src="common.js"></script>
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ — 琴引窯</title>
+  <meta name="description" content="琴引窯への体験教室のご予約・継続教室のご相談はこちらから。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-wrap { background: var(--white); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 380px;
+      gap: 5rem; align-items: start;
+    }
+
+    /* Form */
+    .contact-form-wrap { }
+    .form-group { margin-bottom: 2rem; }
+    .form-label {
+      display: block; font-size: 0.75rem;
+      letter-spacing: 0.18em; color: var(--soil);
+      margin-bottom: 0.6rem;
+    }
+    .form-label span {
+      font-size: 0.65rem; color: var(--clay);
+      margin-left: 0.4rem; letter-spacing: 0.1em;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--smoke);
+      border: 1px solid var(--sand-dk);
+      border-radius: 0;
+      font-family: var(--sans); font-size: 0.85rem;
+      color: var(--ink); font-weight: 300;
+      transition: border-color 0.25s, background 0.25s;
+      appearance: none; outline: none;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--clay);
+      background: var(--white);
+    }
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C8880' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 12px;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    .form-textarea { resize: vertical; min-height: 160px; line-height: 1.9; }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--clay);
+      border: none; cursor: pointer;
+      font-family: var(--sans); font-size: 0.8rem;
+      letter-spacing: 0.22em; color: var(--white);
+      transition: background 0.3s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--clay-dk); }
+
+    /* Privacy note */
+    .form-privacy {
+      font-size: 0.72rem; line-height: 1.9;
+      color: var(--ash-lt); margin-top: 1rem;
+    }
+
+    /* Success message */
+    .form-success {
+      display: none;
+      padding: 2rem;
+      background: var(--smoke);
+      border-left: 3px solid var(--clay);
+      margin-top: 1rem;
+    }
+    .form-success.visible { display: block; }
+    .form-success p {
+      font-family: var(--serif);
+      font-size: 0.9rem; letter-spacing: 0.1em;
+      color: var(--soil);
+    }
+
+    /* Sidebar info */
+    .contact-info { }
+    .info-block {
+      padding: 2rem;
+      background: var(--smoke);
+      margin-bottom: 1.5rem;
+    }
+    .info-block-title {
+      font-family: var(--serif);
+      font-size: 0.9rem; letter-spacing: 0.15em;
+      color: var(--soil); margin-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--sand-dk);
+    }
+    .info-block p {
+      font-size: 0.78rem; line-height: 2.2; color: var(--ash);
+    }
+    .info-block a {
+      color: var(--clay); text-decoration: none;
+    }
+    .info-block a:hover { text-decoration: underline; }
+
+    /* Map placeholder */
+    .map-ph {
+      aspect-ratio: 4/3;
+      background: var(--sand-dk);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ash-lt); font-size: 0.72rem;
+      letter-spacing: 0.15em; margin-bottom: 1.5rem;
+    }
+    /* ↑ 実際のGoogleマップを埋め込む場合は <iframe> に差し替え */
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">琴引窯</a>
+  <ul class="nav-links">
+    <li><a href="about.html">窯について</a></li>
+    <li><a href="gallery.html">作品</a></li>
+    <li><a href="class.html">陶芸教室</a></li>
+    <li><a href="contact.html" class="active">お問い合わせ</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="about.html" class="mobile-link">窯について</a>
+  <a href="gallery.html" class="mobile-link">作品</a>
+  <a href="class.html" class="mobile-link">陶芸教室</a>
+  <a href="contact.html" class="mobile-link">お問い合わせ</a>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="page-header-en">Contact</span>
+    <h1 class="page-header-ja">お問い合わせ</h1>
+  </div>
+</div>
+
+<!-- Contact body -->
+<section class="content contact-wrap">
+  <div class="section-inner">
+    <div class="contact-grid">
+
+      <!-- フォーム -->
+      <div class="contact-form-wrap reveal">
+        <span class="section-label">Form</span>
+        <h2 class="section-title">お問い合わせフォーム</h2>
+        <div class="divider"></div>
+
+        <!--
+          【実装メモ】
+          フォームの送信先は Formspree (https://formspree.io) を推奨。
+          無料プランで月50件まで受信可能。
+          action="https://formspree.io/f/〔YOUR_FORM_ID〕" に書き換えるだけで動作します。
+          メールアドレスの公開不要。
+        -->
+        <form id="contact-form" action="https://formspree.io/f/〔YOUR_FORM_ID〕" method="POST">
+
+          <div class="form-group">
+            <label class="form-label" for="name">
+              お名前 <span>必須</span>
+            </label>
+            <input class="form-input" type="text" id="name" name="name"
+              placeholder="山田 花子" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">
+              メールアドレス <span>必須</span>
+            </label>
+            <input class="form-input" type="email" id="email" name="email"
+              placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="subject">
+              お問い合わせ種別 <span>必須</span>
+            </label>
+            <select class="form-select" id="subject" name="subject" required>
+              <option value="" disabled selected>選択してください</option>
+              <option value="trial">体験教室のご予約</option>
+              <option value="regular">継続教室のご相談</option>
+              <option value="works">作品の購入・受注について</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="date">
+              ご希望の日程（任意）
+            </label>
+            <input class="form-input" type="text" id="date" name="date"
+              placeholder="例：4月中旬の土日、平日午後など">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">
+              メッセージ <span>必須</span>
+            </label>
+            <textarea class="form-textarea" id="message" name="message"
+              placeholder="ご質問・ご要望などをご自由にお書きください。" required></textarea>
+          </div>
+
+          <!-- Formspree用スパム対策 -->
+          <input type="text" name="_gotcha" style="display:none">
+          <input type="hidden" name="_subject" value="琴引窯 お問い合わせ">
+
+          <button class="form-submit" type="submit">送　信</button>
+          <p class="form-privacy">
+            ご入力いただいた個人情報は、お問い合わせへの返答のみに使用し、
+            第三者への提供は行いません。
+          </p>
+        </form>
+
+        <div class="form-success" id="form-success">
+          <p>お問い合わせありがとうございます。<br>
+          内容を確認のうえ、〔数日〕以内にご連絡いたします。</p>
+        </div>
+      </div>
+
+      <!-- サイドバー -->
+      <div class="contact-info reveal">
+
+        <!-- Googleマップ（住所公開する場合） -->
+        <!-- <div class="map-ph">Googleマップ埋め込みエリア</div> -->
+
+        <div class="info-block">
+          <p class="info-block-title">アクセス</p>
+          <p>
+            〒768-0069<br>
+            香川県観音寺市茂木町４丁目１−２８<br>
+            観音寺駅より徒歩約15分
+          </p>
+        </div>
+
+        <div class="info-block">
+          <p class="info-block-title">開催日程について</p>
+          <p>
+            教室は不定期開催です。<br>
+            ご希望の日程をお知らせいただければ、
+            できるだけご希望に沿うよう調整いたします。
+          </p>
+        </div>
+
+        <div class="info-block">
+          <p class="info-block-title">Instagram</p>
+          <p>
+            作品や教室の様子は Instagramでも発信しています。<br>
+            DMでのお問い合わせも歓迎です。<br>
+            <a href="https://www.instagram.com/zikkuworks/" target="_blank" rel="noopener">
+              @zikkuworks
+            </a>
+          </p>
+        </div>
+
+        <div class="info-block">
+          <p class="info-block-title">返信について</p>
+          <p>
+            通常〔2〜3〕営業日以内にご返信いたします。<br>
+            返信が届かない場合は、迷惑メールフォルダもご確認ください。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="index.html">琴引窯</a>
+  <ul class="footer-links">
+    <li><a href="about.html">窯について</a></li>
+    <li><a href="gallery.html">作品</a></li>
+    <li><a href="class.html">陶芸教室</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2026 琴引窯. All rights reserved.</p>
+</footer>
+
+<script src="common.js"></script>
+<script>
+  // Formspree のAJAX送信 (任意・より良いUXのために)
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = '送信中...';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('form-success').classList.add('visible');
+      } else {
+        btn.textContent = '送信に失敗しました。再度お試しください。';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = '送信に失敗しました。再度お試しください。';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作品 — 琴引窯</title>
+  <meta name="description" content="琴引窯の作品ギャラリー。茶碗・花器・湯呑など、手びねりで生まれた器をご覧ください。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Filter tabs */
+    .filter-bar {
+      background: var(--white);
+      padding: 2.5rem 2rem 0;
+      border-bottom: 1px solid var(--sand-dk);
+    }
+    .filter-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; gap: 0; overflow-x: auto;
+    }
+    .filter-btn {
+      background: none; border: none;
+      padding: 0.8rem 1.6rem;
+      font-family: var(--sans); font-size: 0.75rem;
+      letter-spacing: 0.14em; color: var(--ash);
+      cursor: pointer; white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.25s; margin-bottom: -1px;
+    }
+    .filter-btn:hover { color: var(--clay); }
+    .filter-btn.active {
+      color: var(--clay);
+      border-bottom-color: var(--clay);
+    }
+
+    /* Gallery grid */
+    .gallery { background: var(--white); padding: 4rem 2rem 6rem; }
+    .gallery-inner { max-width: 900px; margin: 0 auto; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* Masonry-like offset */
+    .gallery-item { position: relative; }
+    .gallery-item:nth-child(3n+2) { margin-top: 2.5rem; }
+
+    .gallery-item-img {
+      aspect-ratio: 3/4;
+      background: var(--sand);
+      overflow: hidden; position: relative;
+      cursor: pointer;
+    }
+    .gallery-item-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(107,79,58,0);
+      transition: background 0.35s;
+    }
+    .gallery-item:hover .gallery-item-img::after {
+      background: rgba(107,79,58,0.08);
+    }
+    .gallery-item-ph {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ash-lt); font-size: 0.7rem; letter-spacing: 0.18em;
+    }
+    .gallery-item-info {
+      padding: 0.8rem 0 0;
+    }
+    .gallery-item-name {
+      font-family: var(--serif);
+      font-size: 0.88rem; letter-spacing: 0.12em;
+      color: var(--soil); display: block; margin-bottom: 0.2rem;
+    }
+    .gallery-item-detail {
+      font-size: 0.7rem; letter-spacing: 0.1em;
+      color: var(--ash-lt);
+    }
+
+    /* Items hidden by filter */
+    .gallery-item.hidden {
+      display: none;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(44,36,32,0.88);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none;
+      color: var(--sand); font-size: 1.5rem; cursor: pointer;
+      line-height: 1; opacity: 0.6; transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-img {
+      max-width: 90vw; max-height: 85vh;
+      object-fit: contain;
+      /* placeholder */
+      width: 400px; height: 520px;
+      background: var(--sand-dk);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ash); font-size: 0.8rem; letter-spacing: 0.15em;
+    }
+    .lightbox-caption {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--serif);
+      font-size: 0.85rem; letter-spacing: 0.18em;
+      color: rgba(232,221,208,0.7); text-align: center;
+    }
+
+    /* Note for photos */
+    .gallery-note {
+      text-align: center; margin-top: 3rem;
+      font-size: 0.75rem; letter-spacing: 0.14em;
+      color: var(--ash-lt);
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(2,1fr); gap: 1rem; }
+      .gallery-item:nth-child(3n+2) { margin-top: 0; }
+      .gallery-item:nth-child(2n) { margin-top: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">琴引窯</a>
+  <ul class="nav-links">
+    <li><a href="about.html">窯について</a></li>
+    <li><a href="gallery.html" class="active">作品</a></li>
+    <li><a href="class.html">陶芸教室</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="about.html" class="mobile-link">窯について</a>
+  <a href="gallery.html" class="mobile-link">作品</a>
+  <a href="class.html" class="mobile-link">陶芸教室</a>
+  <a href="contact.html" class="mobile-link">お問い合わせ</a>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="page-header-en">Works</span>
+    <h1 class="page-header-ja">作品</h1>
+  </div>
+</div>
+
+<!-- Filter -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" data-filter="all">すべて</button>
+    <button class="filter-btn" data-filter="chawan">茶碗</button>
+    <button class="filter-btn" data-filter="kaki">花器</button>
+    <button class="filter-btn" data-filter="yunomi">湯呑</button>
+    <button class="filter-btn" data-filter="sara">皿・鉢</button>
+    <button class="filter-btn" data-filter="other">その他</button>
+  </div>
+</div>
+
+<!-- Gallery -->
+<section class="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-grid" id="gallery-grid">
+
+      <!-- 写真が届いたら <img src="images/xxx.jpg" alt="作品名"> に差し替え -->
+      <!-- data-category でフィルター対象を指定 -->
+
+      <div class="gallery-item reveal" data-category="chawan">
+        <div class="gallery-item-img" onclick="openLightbox('茶碗')">
+          <div class="gallery-item-ph">写真</div>
+        </div>
+        <div class="gallery-item-info">
+          <span class="gallery-item-name">茶碗</span>
+          <span class="gallery-item-detail">〔土の種類〕・〔釉薬〕</span>
+        </div>
+      </div>
+
+      <div class="gallery-item reveal" data-category="kaki">
+        <div class="gallery-item-img" onclick="openLightbox('花器')">
+          <div class="gallery-item-ph">写真</div>
+        </div>
+        <div class="gallery-item-info">
+          <span class="gallery-item-name">花器</span>
+          <span class="gallery-item-detail">〔土の種類〕・〔釉薬〕</span>
+        </div>
+      </div>
+
+      <div class="gallery-item reveal" data-category="yunomi">
+        <div class="gallery-item-img" onclick="openLightbox('湯呑')">
+          <div class="gallery-item-ph">写真</div>
+        </div>
+        <div class="gallery-item-info">
+          <span class="gallery-item-name">湯呑</span>
+          <span class="gallery-item-detail">〔土の種類〕・〔釉薬〕</span>
+        </div>
+      </div>
+
+      <div class="gallery-item reveal" data-category="sara">
+        <div class="gallery-item-img" onclick="openLightbox('小皿')">
+          <div class="gallery-item-ph">写真</div>
+        </div>
+        <div class="gallery-item-info">
+          <span class="gallery-item-name">小皿</span>
+          <span class="gallery-item-detail">〔土の種類〕・〔釉薬〕</span>
+        </div>
+      </div>
+
+      <div class="gallery-item reveal" data-category="chawan">
+        <div class="gallery-item-img" onclick="openLightbox('茶碗 II')">
+          <div class="gallery-item-ph">写真</div>
+        </div>
+        <div class="gallery-item-info">
+          <span class="gallery-item-name">茶碗 II</span>
+          <span class="gallery-item-detail">〔土の種類〕・〔釉薬〕</span>
+        </div>
+      </div>
+
+      <div class="gallery-item reveal" data-category="other">
+        <div class="gallery-item-img" onclick="openLightbox('壺')">
+          <div class="gallery-item-ph">写真</div>
+        </div>
+        <div class="gallery-item-info">
+          <span class="gallery-item-name">壺</span>
+          <span class="gallery-item-detail">〔土の種類〕・〔釉薬〕</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="gallery-note">
+      写真は順次追加していきます。<br>
+      購入・受注についてはお問い合わせください。
+    </p>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-img" id="lightbox-img">写真</div>
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
+<footer>
+  <a class="footer-logo" href="index.html">琴引窯</a>
+  <ul class="footer-links">
+    <li><a href="about.html">窯について</a></li>
+    <li><a href="gallery.html">作品</a></li>
+    <li><a href="class.html">陶芸教室</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2026 琴引窯. All rights reserved.</p>
+</footer>
+
+<script src="common.js"></script>
+<script>
+  // Filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        if (filter === 'all' || item.dataset.category === filter) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // Lightbox
+  function openLightbox(name) {
+    document.getElementById('lightbox').classList.add('open');
+    document.getElementById('lightbox-caption').textContent = name;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+</body>
+</html>
